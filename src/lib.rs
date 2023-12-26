@@ -1,18 +1,13 @@
-//! This Wizardry is courtesy of Tantan
-//! The project this is based on https://www.youtube.com/watch?v=ModFC1bhobA&t=403s
+//! This Wizardry is courtesy of Tantan and updated to 0.12.1 by me
+//! 
+//! This is based on <https://www.youtube.com/watch?v=ModFC1bhobA&t=403s?>
 //! 
 
 use bevy::utils::thiserror;
 use thiserror::Error;
-/// You are much better off watching the video as documentation(because i made them mostly compatible) than reading my scitzophrenic intrepretation of stuff i wrote late at night
-#[macro_export]
-macro_rules! create_asset_loader {
-    (
-        /// This code is an input that does not need to exist before the macro call 
-        /// for plugin name make sure you have a plugin group to add it too that is initiated with the rest of the project otherwise it's dead code
-        $plugin_name: ident,
-        $loader_name: ident,
-        ///*This code needs to exist in a format like this in the file you want to call it from
+/// a macro to create a generic asset loader for ron files in bevy 0.12.1
+///
+/// How to use the macro
         ///```
         ///#[derive(Debug, Deserialize, TypeUuid, TypePath, Asset)]
         ///#[uuid = "95af7f47-8033-4169-bcaf-23f2f41f9b50"]
@@ -20,10 +15,24 @@ macro_rules! create_asset_loader {
         ///    health: Health,
         ///    spritesheet: String,
         ///}
-        ///```
-        $asset_type: ident    
+        ///
+        /// create_asset_loader!(AssetNamePlugin, AssetNameLoader, AssetType, &["assets/AssetName.ron"]);
+        /// ```
+#[macro_export]
+macro_rules! create_asset_loader {
+    (  
+        $plugin_name: ident,
+        $loader_name: ident,
+        $asset_type: ident,
+        $extensions: expr    
     ) => {
-        use bevy::prelude::*;
+        use bevy::{
+            asset::{AssetLoader, AsyncReadExt, BoxedFuture, LoadContext, io::Reader},
+            app::{App, Plugin},
+            
+        };
+        use crate::utils::CustomAssetLoaderError;
+
 
         pub struct $plugin_name;
 
@@ -63,7 +72,7 @@ macro_rules! create_asset_loader {
     }
 }
 
-/// An error type to satisfy the new bevy asset parametre 
+/// An error type for the asset loader
 #[non_exhaustive]
 #[derive(Debug, Error)]
 pub enum CustomAssetLoaderError {
@@ -76,3 +85,6 @@ pub enum CustomAssetLoaderError {
 }
 
 
+
+
+    

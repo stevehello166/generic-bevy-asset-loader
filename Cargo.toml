@@ -10,3 +10,4 @@ description = "A upgraded version of Tantans asset loading macro for bevy 0.12"
 bevy = "0.12.1"
 ron = "0.8.1"
 serde = "1.0.193"
+
