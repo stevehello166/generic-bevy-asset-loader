@@ -1,6 +1,9 @@
 //! This Wizardry is courtesy of Tantan
 //! The project this is based on https://www.youtube.com/watch?v=ModFC1bhobA&t=403s
 //! 
+
+use bevy::utils::thiserror;
+use thiserror::Error;
 /// You are much better off watching the video as documentation(because i made them mostly compatible) than reading my scitzophrenic intrepretation of stuff i wrote late at night
 #[macro_export]
 macro_rules! create_asset_loader {
@@ -20,10 +23,7 @@ macro_rules! create_asset_loader {
         ///```
         $asset_type: ident    
     ) => {
-        use bevy::asset::AssetLoader;
-        use bevy::asset::io::Reader;
-        use bevy::asset::LoadContext;
-        use bevy::asset::AsyncReadExt;
+        use bevy::prelude::*;
 
         pub struct $plugin_name;
 
@@ -57,9 +57,22 @@ macro_rules! create_asset_loader {
             type Error = CustomAssetLoaderError;
     
             fn extensions(&self) -> &[&str] {
-                &["custom"]
+                $extensions
             }
         }
     }
 }
+
+/// An error type to satisfy the new bevy asset parametre 
+#[non_exhaustive]
+#[derive(Debug, Error)]
+pub enum CustomAssetLoaderError {
+    /// An [IO](std::io) Error
+    #[error("Could not load asset: {0}")]
+    Io(#[from] std::io::Error),
+    /// A [RON](ron) Error
+    #[error("Could not parse RON: {0}")]
+    RonSpannedError(#[from] ron::error::SpannedError),
+}
+
 
