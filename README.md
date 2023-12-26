@@ -1,4 +1,4 @@
-[The Github | https://github.com/stevehello166/generic-bevy-asset-loader]
+[The Github](https://github.com/stevehello166/generic-bevy-asset-loader)
 
 # generic-bevy-asset-loader
 A generic bevy asset loader for bevy 0.12 based on Tantan's video 'Rust Macros Are Magic' ported to 0.12
