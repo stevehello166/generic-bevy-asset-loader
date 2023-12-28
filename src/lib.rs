@@ -38,7 +38,8 @@ macro_rules! create_asset_loader {
 
         impl Plugin for $plugin_name {
             fn build(&self, app: &mut App) {
-                app.register_asset_loader($loader_name);
+                app.register_asset_loader($loader_name)
+                    .add_asset::<$asset_type>();
             }
         }
 
