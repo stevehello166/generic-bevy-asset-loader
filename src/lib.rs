@@ -2,7 +2,7 @@
 //!
 //! This is based on <https://www.youtube.com/watch?v=ModFC1bhobA&t=403s?>
 //!
-mod test;
+//mod test;
 
 use bevy::utils::thiserror;
 use thiserror::Error;
@@ -30,14 +30,15 @@ macro_rules! create_asset_loader {
         use bevy::{
             app::{App, Plugin},
             asset::{io::Reader, AssetLoader, AsyncReadExt, BoxedFuture, LoadContext, App},
-            Plugin
+            Plugin,
+            prelude::*
         };
 
         pub struct $plugin_name;
 
         impl Plugin for $plugin_name {
             fn build(&self, app: &mut App) {
-                app.add_asset::<$asset_type>().register_asset_loader($loader_name);
+                app.init_asset::<$asset_type>().register_asset_loader($loader_name);
                 
             }
         }
