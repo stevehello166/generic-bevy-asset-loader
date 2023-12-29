@@ -10,6 +10,7 @@ A generic bevy asset loader for bevy 0.12 based on Tantan's video 'Rust Macros A
 
 #### Supported Bevy versions
 Generic assset version: Bevy version
+
 0.1.0 -> most recent: 0.12.1
 
 # How to contribute:
