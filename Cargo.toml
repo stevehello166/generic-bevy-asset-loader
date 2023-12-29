@@ -4,10 +4,12 @@ version = "0.1.12"
 edition = "2021"
 license = "MIT"
 description = "A upgraded version of Tantans asset loading macro for bevy 0.12"
+repository = "https://github.com/stevehello166/generic-bevy-asset-loader"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = "0.12.1"
+bevy = {version = "0.12.1", default-features = false, features = []}
 ron = "0.8.1"
 serde = "1.0.193"
+winit = "0.29.7"
 
