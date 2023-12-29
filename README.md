@@ -13,6 +13,9 @@ Generic assset version: Bevy version
 
 0.1.0 -> most recent: 0.12.1
 
+#### Broken versions of this plugin
+1. 0.1.13
+
 # How to contribute:
 - Make bug reports
 - Write tests

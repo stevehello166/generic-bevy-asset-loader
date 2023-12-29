@@ -28,10 +28,10 @@ macro_rules! create_asset_loader {
         $extensions: expr
     ) => {
         use bevy::{
-            app::{App, Plugin},
-            asset::{io::Reader, AssetLoader, AsyncReadExt, BoxedFuture, LoadContext, App},
-            Plugin,
-            prelude::*
+            asset::{io::Reader, ron, AssetLoader, AsyncReadExt, LoadContext},
+            prelude::*,
+            reflect::TypePath,
+            utils::BoxedFuture,
         };
 
         pub struct $plugin_name;
